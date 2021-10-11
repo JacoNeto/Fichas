@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,9 +12,11 @@ import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "tb_fichas")
+@EntityListeners(AuditingEntityListener.class)
 public class Ficha {
 	
 	@Id
@@ -27,6 +30,7 @@ public class Ficha {
 	private String bairro;
 	private String comunidade;
 	private String obs;
+	private String urlLink;
 	
 	@CreatedDate
     @Column(name = "created_date")
@@ -98,6 +102,14 @@ public class Ficha {
 
 	public void setObs(String obs) {
 		this.obs = obs;
+	}
+
+	public String getUrlLink() {
+		return urlLink;
+	}
+
+	public void setUrlLink(String urlLink) {
+		this.urlLink = urlLink;
 	}
 
 	public Date getCreatedDate() {
