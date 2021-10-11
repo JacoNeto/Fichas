@@ -32,9 +32,12 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: const [
                       Profile(),
-                      Text(
-                        "Paulo de Paiva Brasil",
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      Flexible(
+                        child: Text(
+                          "Paulo de Paiva Brasil",
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
                       )
                     ],
                   ),
@@ -88,13 +91,16 @@ class _HomePageState extends State<HomePage> {
                                         ? colorC1
                                         : Colors.white),
                                   ),
-                                  Text(
-                                    '  Cadastrar Ficha',
-                                    style: TextStyle(
-                                        fontSize: 24,
-                                        color: (currentTab == 0
-                                            ? colorC1
-                                            : Colors.white)),
+                                  Flexible(
+                                    child: Text(
+                                      '  Cadastrar Ficha',
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          fontSize: 24,
+                                          color: (currentTab == 0
+                                              ? colorC1
+                                              : Colors.white)),
+                                    ),
                                   ),
                                 ],
                               )),
@@ -120,12 +126,15 @@ class _HomePageState extends State<HomePage> {
                                         ? colorC1
                                         : Colors.white),
                                   ),
-                                  Text('  Visualizar Fichas',
-                                      style: TextStyle(
-                                          fontSize: 24,
-                                          color: (currentTab == 1
-                                              ? colorC1
-                                              : Colors.white))),
+                                  Flexible(
+                                    child: Text('  Visualizar Fichas',
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            fontSize: 24,
+                                            color: (currentTab == 1
+                                                ? colorC1
+                                                : Colors.white))),
+                                  ),
                                 ],
                               )),
                         ),

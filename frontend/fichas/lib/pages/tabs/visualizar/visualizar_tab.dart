@@ -1,3 +1,4 @@
+import 'package:fichas/pages/tabs/visualizar/components/table/fichas_table.dart';
 import 'package:flutter/material.dart';
 
 class VisualizarTab extends StatelessWidget {
@@ -5,6 +6,9 @@ class VisualizarTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Visualizar"));
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: FichasTable(),
+    );
   }
 }
