@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:fichas/models/ficha.dart';
 import 'package:fichas/services/connect/fichas_connect.dart';
 import 'package:fichas/utils/json_utils.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
+import 'package:fichas/models/page.dart' as data_page;
 
 class FichaController extends GetxController {
   final FichasConnect _connect = Get.put(FichasConnect());
@@ -11,16 +15,19 @@ class FichaController extends GetxController {
   var updateLoading = false.obs;
   var removeLoading = false.obs;
 
+  var pageData = data_page.Page();
+
   /// Fetch all Fichas from database
-  Future<List<Ficha>> getAll(int beg, int end) async {
+  Future<List<Ficha>> getAll(int page) async {
     List<Ficha> list = [];
 
-    final http.Response response = await _connect.index(beg, end);
+    final http.Response response = await _connect.index(page);
     print(response.statusCode);
 
     if (response.statusCode == 201 || response.statusCode == 200) {
       print(response.body);
       list = JsonUtils.fichaList(response);
+      pageData = JsonUtils.getPage(response) ?? data_page.Page();
     } else {
       Get.log('Deu erro');
     }
@@ -32,7 +39,12 @@ class FichaController extends GetxController {
   Future<void> create(Ficha ficha) async {
     try {
       final http.Response response = await _connect.create(ficha);
-      print(response.body);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        Get.snackbar("Sucesso!", "A operação foi concluída com êxito",
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+            snackPosition: SnackPosition.BOTTOM);
+      }
     } on Exception catch (e) {
       print(e);
       Get.showSnackbar(
@@ -49,7 +61,12 @@ class FichaController extends GetxController {
   Future<void> edit(Ficha ficha) async {
     try {
       final http.Response response = await _connect.edit(ficha);
-      print(response.body);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        Get.snackbar("Sucesso!", "A operação foi concluída com êxito",
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+            snackPosition: SnackPosition.BOTTOM);
+      }
     } on Exception catch (e) {
       print(e);
       Get.showSnackbar(
@@ -66,7 +83,12 @@ class FichaController extends GetxController {
   Future<void> remove(Ficha ficha) async {
     try {
       final http.Response response = await _connect.remove(ficha);
-      print(response.body);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        Get.snackbar("Sucesso!", "A operação foi concluída com êxito",
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+            snackPosition: SnackPosition.BOTTOM);
+      }
     } on Exception catch (e) {
       print(e);
       Get.showSnackbar(
@@ -76,6 +98,26 @@ class FichaController extends GetxController {
           isDismissible: true,
         ),
       );
+    }
+  }
+
+  //// TABLE
+  ///
+  ///
+
+  var pageAtual = 0.obs;
+
+  void previousPage() {
+    if (pageAtual.value > 0) {
+      print("valooooooor" + pageAtual.value.toString());
+      pageAtual.value--;
+    }
+  }
+
+  void nextPage() {
+    if (pageAtual.value < (pageData.totalPages ?? 0) - 1) {
+      print("valooooooor" + pageAtual.value.toString());
+      pageAtual.value++;
     }
   }
 }

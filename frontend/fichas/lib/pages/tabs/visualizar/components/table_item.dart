@@ -28,7 +28,7 @@ class _TableItemState extends State<TableItem> {
   @override
   Widget build(BuildContext context) {
     String nome = widget.ficha.nome ?? "";
-    String cpf = widget.ficha.cpf ?? "";
+    String email = widget.ficha.cpf ?? "";
     String telefone = widget.ficha.telefone ?? "";
     String endereco = widget.ficha.endereco ?? "";
     String bairro = widget.ficha.bairro ?? "";
@@ -77,7 +77,7 @@ class _TableItemState extends State<TableItem> {
                         child: Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: TextFormField(
-                            initialValue: cpf,
+                            initialValue: email,
                             validator: (value) {
                               return null;
                             },
@@ -85,9 +85,9 @@ class _TableItemState extends State<TableItem> {
                                 border: OutlineInputBorder(),
                                 fillColor: Colors.white,
                                 filled: true,
-                                labelText: 'cpf'),
+                                labelText: 'Email'),
                             onChanged: (value) {
-                              cpf = value;
+                              email = value;
                             },
                             textInputAction: TextInputAction.next,
                           ),
@@ -240,7 +240,7 @@ class _TableItemState extends State<TableItem> {
                                       var novaficha = Ficha(
                                           id: widget.ficha.id!,
                                           nome: nome,
-                                          cpf: cpf,
+                                          cpf: email,
                                           telefone: telefone,
                                           endereco: endereco,
                                           comunidade: comunidade,

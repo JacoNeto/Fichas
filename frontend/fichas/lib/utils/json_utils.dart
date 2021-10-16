@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:fichas/models/ficha.dart';
+import 'package:fichas/models/page.dart';
 import 'package:fichas/models/result_response/result_response.dart';
 import 'package:http/http.dart';
 //import 'package:get/get.dart';
@@ -19,7 +20,7 @@ class JsonUtils {
   }
 
   static Map<String, dynamic> getMap(Response response) {
-    return json.decode(response.body.toString());
+    return json.decode((utf8.decode(response.bodyBytes).toString()));
     //return json.decode(utf8.decode(response.bodyString!.runes.toList()));
   }
 
@@ -40,13 +41,12 @@ class JsonUtils {
     return list;
   }
 
-  ///Recupera Pessoa específica
-  /*static Person? getPerson(Response response) {
+  ///Recupera dados da pagina
+  static Page? getPage(Response response) {
     Map<String, dynamic> data = getMap(response);
-    Person? person = (data['_obj'] == null)
+    Page? page = (data['page'] == null)
         ? null
-        : Person.fromJson(data['_obj'] as Map<String, dynamic>);
-    return person;
-  }*/
-
+        : Page.fromJson(data['page'] as Map<String, dynamic>);
+    return page;
+  }
 }

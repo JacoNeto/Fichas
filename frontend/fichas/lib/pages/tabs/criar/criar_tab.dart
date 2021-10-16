@@ -19,7 +19,7 @@ class _CriarFormState extends State<CriarForm> {
 
   String nome = "";
 
-  String cpf = "";
+  String email = "";
 
   String telefone = "";
 
@@ -83,9 +83,9 @@ class _CriarFormState extends State<CriarForm> {
                                   border: OutlineInputBorder(),
                                   fillColor: Colors.white,
                                   filled: true,
-                                  labelText: 'cpf'),
+                                  labelText: 'email'),
                               onChanged: (value) {
-                                cpf = value;
+                                email = value;
                               },
                               textInputAction: TextInputAction.next,
                             ),
@@ -207,7 +207,7 @@ class _CriarFormState extends State<CriarForm> {
                               onPressed: () async {
                                 var ficha = Ficha(
                                     nome: nome,
-                                    cpf: cpf,
+                                    cpf: email,
                                     telefone: telefone,
                                     endereco: endereco,
                                     comunidade: comunidade,
