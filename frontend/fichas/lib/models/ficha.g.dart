@@ -15,6 +15,7 @@ Ficha _$FichaFromJson(Map<String, dynamic> json) => Ficha(
       bairro: json['bairro'] as String?,
       comunidade: json['comunidade'] as String?,
       obs: json['obs'] as String?,
+      urlLink: json['urlLink'] as String?,
       createdDate: json['createdDate'] as String?,
       lastModifiedDate: json['lastModifiedDate'] as String?,
     );
@@ -27,6 +28,7 @@ Map<String, dynamic> _$FichaToJson(Ficha instance) => <String, dynamic>{
       'bairro': instance.bairro,
       'comunidade': instance.comunidade,
       'obs': instance.obs,
+      'urlLink': instance.urlLink,
       'createdDate': instance.createdDate,
       'lastModifiedDate': instance.lastModifiedDate,
     };

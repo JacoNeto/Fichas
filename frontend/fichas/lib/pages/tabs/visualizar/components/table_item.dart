@@ -4,6 +4,7 @@ import 'package:fichas/models/ficha.dart';
 import 'package:fichas/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TableItem extends StatefulWidget {
   const TableItem({Key? key, required this.ficha}) : super(key: key);
@@ -297,7 +298,7 @@ class _TableItemState extends State<TableItem> {
                             borderRadius: BorderRadius.circular(30.0),
                             child: const Card(
                               child: Icon(
-                                Icons.camera,
+                                Icons.download,
                                 size: 50,
                                 color: Colors.grey,
                               ),
@@ -306,13 +307,16 @@ class _TableItemState extends State<TableItem> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ElevatedButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Enviar",
-                            style: TextStyle(color: colorC1),
+                          onPressed: widget.ficha.urlLink == null
+                              ? null
+                              : () {
+                                  _launchURL(widget.ficha.urlLink);
+                                },
+                          child: const Text(
+                            "Baixar",
+                            style: TextStyle(color: Colors.white),
                           ),
-                          style:
-                              ElevatedButton.styleFrom(primary: Colors.white),
+                          style: ElevatedButton.styleFrom(primary: Colors.blue),
                         ),
                       ),
                     ],
@@ -323,4 +327,7 @@ class _TableItemState extends State<TableItem> {
       ),
     );
   }
+
+  void _launchURL(url) async =>
+      await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
 }

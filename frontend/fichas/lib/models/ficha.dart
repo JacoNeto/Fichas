@@ -9,6 +9,7 @@ class Ficha {
   String? bairro;
   String? comunidade;
   String? obs;
+  String? urlLink;
   String? createdDate;
   String? lastModifiedDate;
 
@@ -21,6 +22,7 @@ class Ficha {
       this.bairro,
       this.comunidade,
       this.obs,
+      this.urlLink,
       this.createdDate,
       this.lastModifiedDate});
 
